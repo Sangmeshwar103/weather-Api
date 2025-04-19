@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkyCast - Weather App</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Global Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: linear-gradient(-45deg, #74ebd5, #9face6, #a18cd1, #fbc2eb);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .weather-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 30px 40px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(12px);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            animation: fadeIn 1.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .weather-card h1 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        input[type="text"] {
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            width: 80%;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        button {
+            padding: 10px 25px;
+            background-color: #ffffff;
+            border: none;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 16px;
+            color: #333;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #ffcece;
+            color: #000;
+        }
+
+        .weather-data {
+            margin-top: 25px;
+            font-size: 18px;
+        }
+
+        .weather-data p {
+            margin: 10px 0;
+        }
+
+        .weather-icon {
+            font-size: 50px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="weather-card">
+        <h1>☁️ SkyCast</h1>
+        <form action="" method="POST">
+            {% csrf_token %}
+            <input type="text" name="city" placeholder="Enter city name..." required>
+            <br><br>
+            <button type="submit">Check Weather</button>
+        </form>
+
+        {% if name %}
+        <div class="weather-data">
+            <div class="weather-icon">🌤️</div>
+            <p><strong>City:</strong> {{ name }}</p>
+            <p><strong>Condition:</strong> {{ main }}</p>
+            <p><strong>Description:</strong> {{ description }}</p>
+            <p><strong>Temperature:</strong> {{ temp }} °f</p>
+            <p><strong>Wind Speed:</strong> {{ wind }} m/s</p>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
